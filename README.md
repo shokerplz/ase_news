@@ -4,9 +4,9 @@ sudo apt-get update<br>
 ### Next we need to install pip (in ubuntu python included)<br>
 sudo apt-get install python-pip<br>
 ### Next some python stuff<br>
-pip install telepot<br>
-pip install beautifulsoup4<br>
-pip install lxml<br>
-change tBot api key in tg_bot.py and tg_bot_stat.py<br>
-change admin_id to your tg id<br>
-### Run script using python tg_bot_stat.py
+pip install -r requirements.txt<br>
+add file links.txt with link to the last post on site (optional)<br>
+add file inst_link.txt with picture on the last post page (optional)<br>
+add file cookies.json with cookie of instagram login (optional)<br>
+set ADMIN_TG_ID, TG_CHANNEL, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION, INST_USER, INST_PASSWORD in heroku<br>
+### Run or push to heroku script using python clock.py
