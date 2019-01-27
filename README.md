@@ -3,7 +3,7 @@
 sudo apt-get update<br>
 ### Next we need to install pip (in ubuntu python included)<br>
 sudo apt-get install python-pip<br>
-### Next some python stuff<br>
+### Next we need to change some settings<br>
 pip install -r requirements.txt<br>
 add file links.txt with link to the last post on site (optional)<br>
 add file inst_link.txt with picture on the last post page (optional)<br>
