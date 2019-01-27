@@ -74,6 +74,7 @@ def make_square(im, min_size=256, fill_color=(0, 0, 0, 0)):
     new_im.paste(im, ((size - x) / 2, (size - y) / 2))
     new_im.save("picture.jpg")
 def update():
+        global new_settings_file
         global link
         work = open("inst_working.ase", "a+")
         work_file = work.read()
@@ -85,7 +86,6 @@ def update():
             os.remove(new_settings_file)
             with open(new_settings_file, 'w') as outfile:
                 json.dump(cache_settings, outfile, default=to_json)
-            s3.upload_fileobj(open(new_settings_file, "r"), 'heroku', new_settings_file)
         link = open("links.txt", "r").read()
         while(len(link) == 0):
             link = open("links.txt", "r").read()
@@ -97,6 +97,7 @@ def update():
         return(image_link.split("?", 1)[0])
 def send_picture(final_link, link):
     global tags
+    global new_settings_file
     coup = BeautifulSoup(urllib2.urlopen(link), "lxml")
     for tag in coup.find_all("meta"):
         if tag.get("property", None) == "og:description":
@@ -122,5 +123,6 @@ def send_picture(final_link, link):
         photo_data, photo_size = media.prepare_image("picture.jpg", aspect_ratios=MediaRatios.standard)
     api.post_photo(photo_data, photo_size, caption=caption)
     tags = ""
+    s3.upload_fileobj(open(new_settings_file, "r"), 'heroku', new_settings_file)
     print("Success")
 check_site()
