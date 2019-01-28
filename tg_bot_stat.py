@@ -12,12 +12,11 @@ import signal
 import boto3
 reload(sys)
 sys.setdefaultencoding('utf-8')
-s3 = boto3.client('s3',
-    aws_access_key_id=os.environ['CLOUDCUBE_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'],)
-bucket = s3.Bucket('cloud-cube-eu')
-result = client.list_objects(Bucket=bucket, Prefix="dkrkfj6m17zs")
-print(result)
+session = boto3.session.Session()
+s3 = session.client(
+    service_name='s3',
+    endpoint_url='https://storage.yandexcloud.net'
+)
 bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
 inst_usr = os.environ['INST_USER']
 inst_pwd = os.environ['INST_PASSWORD']
@@ -25,6 +24,10 @@ link = ""
 link1 = ""
 #admin_id = os.environ['ADMIN_TG_ID']
 #tg_channel = os.environ['TG_CHANNEL']
+try:
+    for key in s3.list_objects(Bucket='heroku')['Contents']:
+        s3.download_file('heroku', key['Key'], key['Key'])
+except: print("Error appeared")
 @bot.message_handler(func=lambda message: True)
 def message_receive(message):
     f = open("links.txt", "a+")
@@ -84,3 +87,4 @@ if (os.path.isfile("working.ase")):
 #tg_bot = subprocess.Popen("python tg_bot.py "+admin_id+" "+tg_channel, shell=True, preexec_fn=os.setsid)
 inst_bot = subprocess.Popen("python inst_bot.py "+inst_usr+" "+inst_pwd, shell=True, preexec_fn=os.setsid)
 bot.infinity_polling(True)
+os.killpg(os.getpgid(tg_bot.pid), signal.SIGTERM)
