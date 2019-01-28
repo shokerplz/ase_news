@@ -19,8 +19,8 @@ inst_usr = os.environ['INST_USER']
 inst_pwd = os.environ['INST_PASSWORD']
 link = ""
 link1 = ""
-admin_id = os.environ['ADMIN_TG_ID']
-tg_channel = os.environ['TG_CHANNEL']
+#admin_id = os.environ['ADMIN_TG_ID']
+#tg_channel = os.environ['TG_CHANNEL']
 try:
     for obj in bucket.objects.all():
         print(obj.key, obj.last_modified)
