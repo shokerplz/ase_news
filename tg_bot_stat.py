@@ -12,10 +12,8 @@ import signal
 import boto3
 reload(sys)
 sys.setdefaultencoding('utf-8')
-session = boto3.session.Session()
-s3 = session.client(
-    service_name='s3'
-)
+s3 = boto3.resource('s3')
+bucket = s3.Bucket('cloud-cube-eu')
 bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
 inst_usr = os.environ['INST_USER']
 inst_pwd = os.environ['INST_PASSWORD']
@@ -24,8 +22,8 @@ link1 = ""
 admin_id = os.environ['ADMIN_TG_ID']
 tg_channel = os.environ['TG_CHANNEL']
 try:
-    for key in s3.list_objects(Bucket='cloud-cube-eu')['Contents']:
-        s3.download_file('cloud-cube-eu', key['Key'], key['Key'])
+    for obj in bucket.objects.all():
+        print(obj.key, obj.last_modified)
 except: print("Error appeared")
 @bot.message_handler(func=lambda message: True)
 def message_receive(message):
