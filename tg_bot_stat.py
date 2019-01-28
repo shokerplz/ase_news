@@ -12,8 +12,11 @@ import signal
 import boto3
 reload(sys)
 sys.setdefaultencoding('utf-8')
-s3 = boto3.resource('s3')
-bucket = s3.Bucket('cloud-cube-eu')
+s3 = boto3.client(
+    's3',
+    aws_access_key_id=os.environ['CLOUDCUBE_ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'],
+)
 bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
 inst_usr = os.environ['INST_USER']
 inst_pwd = os.environ['INST_PASSWORD']
@@ -21,10 +24,8 @@ link = ""
 link1 = ""
 #admin_id = os.environ['ADMIN_TG_ID']
 #tg_channel = os.environ['TG_CHANNEL']
-try:
-    for obj in bucket.objects.all():
-        print(obj.key, obj.last_modified)
-except: print("Error appeared")
+for key in s3.list_objects(Bucket='heroku')['Contents']:
+    s3.download_file('heroku', key['Key'], key['Key'])
 @bot.message_handler(func=lambda message: True)
 def message_receive(message):
     f = open("links.txt", "a+")
