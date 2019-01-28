@@ -14,7 +14,8 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 s3 = boto3.resource('s3',
     aws_access_key_id=os.environ['CLOUDCUBE_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'])
+    aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'],
+    endpoint_url=os.environ['CLOUDCUBE_URL'],
 my_bucket = s3.Bucket('cloud-cube-eu')
 bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
 inst_usr = os.environ['INST_USER']
