@@ -12,12 +12,9 @@ import signal
 import boto3
 reload(sys)
 sys.setdefaultencoding('utf-8')
-client = boto3.client(
-    's3',
+s3 = boto3.resource('s3',
     aws_access_key_id=os.environ['CLOUDCUBE_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'],
-)
-s3 = boto3.resource('s3')
+    aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'])
 my_bucket = s3.Bucket('cloud-cube-eu')
 bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
 inst_usr = os.environ['INST_USER']
