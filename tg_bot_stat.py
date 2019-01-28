@@ -16,7 +16,6 @@ s3 = boto3.resource('s3',
     aws_access_key_id=os.environ['CLOUDCUBE_ACCESS_KEY_ID'],
     aws_secret_access_key=os.environ['CLOUDCUBE_SECRET_ACCESS_KEY'],
     endpoint_url=os.environ['CLOUDCUBE_URL'],)
-my_bucket = s3.Bucket("cloud-cube-eu")
 bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
 inst_usr = os.environ['INST_USER']
 inst_pwd = os.environ['INST_PASSWORD']
@@ -24,9 +23,8 @@ link = ""
 link1 = ""
 #admin_id = os.environ['ADMIN_TG_ID']
 #tg_channel = os.environ['TG_CHANNEL']
-for object in my_bucket.objects.all():
-    my_bucket.download_file(object.key, filename)
-    print(filename)
+for key in s3.list_objects(Bucket='cloud-cube-eu')['Contents']:
+    s3.download_file('cloud-cube-eu', key['Key'], key['Key'])
 @bot.message_handler(func=lambda message: True)
 def message_receive(message):
     f = open("links.txt", "a+")
