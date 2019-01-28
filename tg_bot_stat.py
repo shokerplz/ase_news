@@ -24,8 +24,9 @@ link = ""
 link1 = ""
 #admin_id = os.environ['ADMIN_TG_ID']
 #tg_channel = os.environ['TG_CHANNEL']
-for key in s3.list_objects(Bucket='heroku')['Contents']:
-    s3.download_file('heroku', key['Key'], key['Key'])
+for key in s3.list_objects(Bucket='cloud-cube-eu')['Contents']:
+    print(key.key, key.last_modified)
+    s3.download_file('cloud-cube-eu', key['Key'], key['Key'])
 @bot.message_handler(func=lambda message: True)
 def message_receive(message):
     f = open("links.txt", "a+")
