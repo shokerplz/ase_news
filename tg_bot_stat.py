@@ -84,7 +84,7 @@ def send_inst_status(message):
 if (os.path.isfile("working.ase")): 
     os.remove("working.ase")
     print("file removed")
-tg_bot = subprocess.Popen("python tg_bot.py 175628933 -1001337255502"+admin_id+" "+tg_channel, shell=True, preexec_fn=os.setsid)
+tg_bot = subprocess.Popen("python tg_bot.py 175628933 -1001337255502", shell=True, preexec_fn=os.setsid)
 inst_bot = subprocess.Popen("python inst_bot.py "+inst_usr+" "+inst_pwd, shell=True, preexec_fn=os.setsid)
 bot.infinity_polling(True)
 os.killpg(os.getpgid(tg_bot.pid), signal.SIGTERM)
