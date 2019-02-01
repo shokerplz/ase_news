@@ -42,8 +42,8 @@ Pillow==5.4.1
 pyOpenSSL==17.5.0
 pyTelegramBotAPI==3.6.6
 pyxdg==0.25
-pyyaml>=4.2b1
-requests>=2.20.0
+pyyaml==3.12
+requests==2.11.1
 requests-toolbelt==0.7.0
 SecretStorage==2.3.1
 six==1.11.0
