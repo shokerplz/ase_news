@@ -17,7 +17,7 @@ s3 = session.client(
     service_name='s3',
     endpoint_url='https://storage.yandexcloud.net'
 )
-bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
+bot = telebot.TeleBot(os.environ['TG_BOT_API_KEY'])
 inst_usr = os.environ['INST_USER']
 inst_pwd = os.environ['INST_PASSWORD']
 link = ""
