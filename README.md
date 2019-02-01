@@ -8,5 +8,5 @@ pip install -r requirements.txt<br>
 add file links.txt with link to the last post on site (optional)<br>
 add file inst_link.txt with picture on the last post page (optional)<br>
 add file cookies.json with cookie of instagram login (optional)<br>
-set AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION, INST_USER, INST_PASSWORD in heroku<br>
+set AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION, INST_USER, INST_PASSWORD, TG_BOT_API_KEY in heroku<br>
 ### Run or push to heroku script using python clock.py
