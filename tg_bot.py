@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import telebot
 import sys
-import urllib2
+import urllib.request
 from bs4 import BeautifulSoup
 from lxml import html
 import boto3
@@ -58,7 +58,7 @@ def check_site(past_link):
                 s3.upload_fileobj(open("links.txt", "r"), 'heroku', 'links.txt')
                 data = past_link
                 f = open("links.txt", "a+")
-            soup = BeautifulSoup(urllib2.urlopen("https://applespbevent.ru/"), features="lxml")
+            soup = BeautifulSoup(urllib.request.urlopen("https://applespbevent.ru/"), features="lxml")
             soup = soup.find("div", {"class": "post-inner post-hover"})
             for link in soup.find_all('a', href=True):
                 links.append(link.get('href'))
@@ -68,7 +68,7 @@ def check_site(past_link):
             time.sleep(30)
             del links[:]
 def bot_send(message):
-        soup1 = BeautifulSoup(urllib2.urlopen(message))
+        soup1 = BeautifulSoup(urllib.request.urlopen(message))
         pc_link = "<a href='"+message+"'>"+"Прямая ссылка"+"</a>"
         message = message[8:]
         message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
