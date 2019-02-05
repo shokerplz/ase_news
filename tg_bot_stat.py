@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import telebot
+import importlib
 import sys
 import urllib.request
 from bs4 import BeautifulSoup
@@ -10,7 +11,7 @@ import time
 import subprocess
 import signal
 import boto3
-reload(sys)
+importlib.reload(sys)
 sys.setdefaultencoding('utf-8')
 session = boto3.session.Session()
 s3 = session.client(
