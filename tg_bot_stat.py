@@ -73,9 +73,8 @@ def send_inst_status(message):
             check = work.read()
         else: check = "0"
         print (check)
-        if (check == "1"):
+        if (check != ""):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя опубликованная новость: "+link1)
-            time.sleep(60)
             open("inst_working.ase", "w").close()
         else: bot.reply_to(message, "Бот не работает")
     else: bot.send_message(message.chat.id, "Бот не получил ссылку")
