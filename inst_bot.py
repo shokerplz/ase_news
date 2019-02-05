@@ -6,6 +6,7 @@ import requests
 import os
 import sys
 import boto3
+import codecs
 import time
 import json
 from instagram_private_api import Client, ClientCompatPatch, MediaRatios
