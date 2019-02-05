@@ -124,6 +124,6 @@ def send_picture(final_link, link):
         photo_data, photo_size = media.prepare_image("picture.jpg", aspect_ratios=MediaRatios.standard)
     api.post_photo(photo_data, photo_size, caption=caption)
     tags = ""
-    s3.upload_fileobj(open(new_settings_file, "r"), 'heroku', new_settings_file)
+    s3.upload_fileobj(open(new_settings_file, "rb"), 'heroku', new_settings_file)
     print("Success")
 check_site()
