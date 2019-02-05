@@ -7,8 +7,6 @@ from bs4 import BeautifulSoup
 from lxml import html
 import boto3
 import time
-reload(sys)
-sys.setdefaultencoding('utf-8')
 url_html = ""
 links = []
 past_link = ""
