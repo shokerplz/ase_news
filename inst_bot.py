@@ -80,7 +80,7 @@ def update():
         work_file = work.read()
         if (work_file == ""):
             work.write("1")
-            work.close()
+        work.close()
         cache_settings = api.settings
         if (os.path.isfile(new_settings_file)):
             os.remove(new_settings_file)
