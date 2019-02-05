@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import telebot
 import sys
-import urllib2
+import urllib.request
 from bs4 import BeautifulSoup
 from lxml import html
 import os
@@ -51,7 +51,7 @@ def send_status(message):
     file = open("links.txt", "r")
     link1 = file.read()
     if (len(link1) != 0):
-        soup = BeautifulSoup(urllib2.urlopen(link1), features="lxml")
+        soup = BeautifulSoup(urllib.urlopen(link1), features="lxml")
         link1 = soup.title.string
         if (os.path.isfile("working.ase")):
             work = open("working.ase", "r")
@@ -68,7 +68,7 @@ def send_inst_status(message):
     file = open("links.txt", "r")
     link1 = file.read()
     if (len(link1) != 0):
-        soup = BeautifulSoup(urllib2.urlopen(link1), features="lxml")
+        soup = BeautifulSoup(urllib.urlopen(link1), features="lxml")
         link1 = soup.title.string
         if (os.path.isfile("inst_working.ase")):
             work = open("inst_working.ase", "r")
