@@ -60,7 +60,7 @@ def check_site():
         if (open("inst_link.txt", "r").read()!=final_link):
             open("inst_link.txt", "w").close()
             open("inst_link.txt", "w").write(final_link)
-            s3.upload_fileobj(open("inst_link.txt", "r", encoding='utf-8'), 'heroku', 'inst_link.txt')
+            s3.upload_fileobj(open("inst_link.txt", "rb", encoding='utf-8'), 'heroku', 'inst_link.txt')
             if (os.path.isfile("picture.jpg")):
                 os.remove("picture.jpg")
             if (os.path.isfile("picture.png")):
