@@ -71,7 +71,7 @@ def make_square(im, min_size=256, fill_color=(0, 0, 0, 0)):
     x, y = im.size
     size = max(min_size, x, y)
     new_im = Image.new('RGB', (size, size), fill_color)
-    new_im.paste(im, ((size - x) / 2, (size - y) / 2))
+    new_im.paste(im, ((size - x) // 2, (size - y) // 2))
     new_im.save("picture.jpg")
 def update():
         global new_settings_file
