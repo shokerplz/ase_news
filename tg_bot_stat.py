@@ -35,7 +35,7 @@ def message_receive(message):
     elif ((message.text == "/start") and (len(link) != 0)): welcome_message(message)
     elif (len(link) == 0):
         if (message.text.find("applespbevent.ru")==-1): 
-            bot.send_message(admin_id, "Отправьте ссылку на последнюю опубликованную новость")
+            bot.send_message(message.chat.id, "Отправьте ссылку на последнюю опубликованную новость")
         if (message.text.find("applespbevent.ru")!=-1): 
             link = message.text
             f.write(link)
