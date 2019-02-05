@@ -53,7 +53,7 @@ def check_site(past_link):
                 open("links.txt", "w").close()
                 f.write(past_link)
                 f.close()
-                s3.upload_fileobj(open("links.txt", "r"), 'heroku', 'links.txt')
+                s3.upload_fileobj(open("links.txt", "rb"), 'heroku', 'links.txt')
                 data = past_link
                 f = open("links.txt", "a+")
             soup = BeautifulSoup(urllib.request.urlopen("https://applespbevent.ru/"), features="lxml")
