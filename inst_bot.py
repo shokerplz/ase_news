@@ -107,7 +107,8 @@ def send_picture(final_link, link):
             if(tag.get("content", None).find("#") == -1):
                 tags += "#"+tag.get("content", None)
             else: tags += tag.get("content", None)
-    caption = BeautifulSoup(urllib2.urlopen(link)).title.string+"\n"+describtion+"\n"+link+"\n"+tags
+    link_site = "applespbevent.ru"
+    caption = BeautifulSoup(urllib2.urlopen(link)).title.string+"\n"+describtion+"\n"+link_site+"\n"+tags
     print(final_link)
     if (final_link.find("jpeg") != -1):
         urllib.urlretrieve(final_link, "picture."+"jpg")
