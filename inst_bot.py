@@ -1,5 +1,4 @@
-import urllib2
-import urllib
+import urllib.request
 from bs4 import BeautifulSoup
 from lxml import html
 import requests
@@ -91,7 +90,7 @@ def update():
         while(len(link) == 0):
             link = open("links.txt", "r").read()
             time.sleep(5)
-        soup = BeautifulSoup(urllib2.urlopen(link), "lxml")
+        soup = BeautifulSoup(urllib.request.urlopen(link), "lxml")
         for tag in soup.find_all("meta"):
             if tag.get("property", None) == "og:image":
                 image_link = tag.get("content", None)
@@ -99,7 +98,7 @@ def update():
 def send_picture(final_link, link):
     global tags
     global new_settings_file
-    coup = BeautifulSoup(urllib2.urlopen(link), "lxml")
+    coup = BeautifulSoup(urllib.request.urlopen(link), "lxml")
     for tag in coup.find_all("meta"):
         if tag.get("property", None) == "og:description":
             describtion = tag.get("content", None)
@@ -109,11 +108,11 @@ def send_picture(final_link, link):
                 tags += "#"+tag.get("content", None)
             else: tags += tag.get("content", None)
     link_site = "applespbevent.ru"
-    caption = BeautifulSoup(urllib2.urlopen(link)).title.string+"\n"+describtion+"\n"+link_site+"\n"+tags
+    caption = BeautifulSoup(urllib.request.urlopen(link)).title.string+"\n"+describtion+"\n"+link_site+"\n"+tags
     print(final_link)
     if (final_link.find("jpeg") != -1):
-        urllib.urlretrieve(final_link, "picture."+"jpg")
-    else: urllib.urlretrieve(final_link, "picture."+final_link[-3:])
+        urllib.request.urlretrieve(final_link, "picture."+"jpg")
+    else: urllib.request.urlretrieve(final_link, "picture."+final_link[-3:])
     if (final_link[-3:] == "png"):
         im = Image.open("picture.png")
         rgb_im = im.convert('RGB')
