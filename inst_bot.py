@@ -105,8 +105,8 @@ def send_picture(final_link, link):
     for tag in coup.find_all("meta"):
         if tag.get("property", None) == "article:tag":
             if(tag.get("content", None).find("#") == -1):
-                tags += "#"+tag.get("content", None)
-            else: tags += tag.get("content", None)
+                tags += "#"+(tag.get("content", None)).replace(" ", "_")+" "
+            else: tags += (tag.get("content", None)).replace(" ", "_")+" "
     link_site = "aSPBe.ru"
     caption = BeautifulSoup(urllib.request.urlopen(link)).title.string+"\n"+describtion+"\n"+link_site+"\n"+tags
     print(final_link)
