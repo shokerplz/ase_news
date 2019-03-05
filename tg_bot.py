@@ -40,6 +40,7 @@ def check_site(past_link):
             for link in soup.find_all('a', href=True):
                 links.append(link.get('href'))
             if (past_link != links[0]):
+                bot_send(links[0])
                 past_link = links[0]
             time.sleep(30)
             del links[:]
