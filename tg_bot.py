@@ -18,7 +18,7 @@ s3 = session.client(
 )
 def check_file():
     global past_link
-    f = open("links.txt", "a+")
+    f = open("links.txt", "r")
     past_link = f.read()
     print(past_link)
     check_site(past_link)
@@ -28,6 +28,12 @@ def check_site(past_link):
         f = open("links.txt", "a+")
         data = f.read()
         while True:
+            work = open("working.ase", "a+")	
+            work_file = work.read()	
+            if (work_file == ""):	
+                work.write("1")	
+                work.close()	
+            sys.stdout.flush()
             if (data != past_link):
                 open("links.txt", "w").close()
                 f.write(past_link)
@@ -40,19 +46,19 @@ def check_site(past_link):
             for link in soup.find_all('a', href=True):
                 links.append(link.get('href'))
             if (past_link != links[0]):
-                bot_send(links[0])
                 past_link = links[0]
+                bot_send(links[0])
             time.sleep(30)
             del links[:]
 def bot_send(message):
         soup1 = BeautifulSoup(urllib.request.urlopen(message))
-        pc_link = "<a href='"+message+"'>"+"Прямая ссылка"+"</a>"
+        pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
         message = message[8:]
         for tag in soup1.find_all("meta"):
             if tag.get("property", None) == "og:description":
                 describtion = tag.get("content", None)
         message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
         print(message)
-        url_html = "<a href='"+message+"'>"+soup1.title.string+"</a> "+ pc_link + "\n" + describtion
+        url_html = "<a href='"+message+"'>"+soup1.title.string+"</a> "+ pc_link
         bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
 check_file()
