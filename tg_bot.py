@@ -61,7 +61,10 @@ def bot_send(message):
                     describtion = tag.get("content", None)
             message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
             print(message)
-            url_html = "<a href='"+message+"'>"+soup1.title.string+"</a> "+ pc_link
+            if (" | Apple SPb Event" in soup1.title.string):
+                name = soup1.title.string[:-18]
+            else: name = soup1.title.string
+            url_html = "<a href='"+message+"'>"+name+"</a> "+ pc_link
             bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
         except: 
             print("Error appeared. Try again")
