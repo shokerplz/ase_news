@@ -51,14 +51,21 @@ def check_site(past_link):
             time.sleep(30)
             del links[:]
 def bot_send(message):
-        soup1 = BeautifulSoup(urllib.request.urlopen(message))
-        pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
-        message = message[8:]
-        for tag in soup1.find_all("meta"):
-            if tag.get("property", None) == "og:description":
-                describtion = tag.get("content", None)
-        message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
-        print(message)
-        url_html = "<a href='"+message+"'>"+soup1.title.string+"</a> "+ pc_link
-        bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
+    while True:
+        try:
+            soup1 = BeautifulSoup(urllib.request.urlopen(message))
+            pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
+            message = message[8:]
+            for tag in soup1.find_all("meta"):
+                if tag.get("property", None) == "og:description":
+                    describtion = tag.get("content", None)
+            message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
+            print(message)
+            url_html = "<a href='"+message+"'>"+soup1.title.string+"</a> "+ pc_link
+            bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
+        except: 
+            print("Error appeared. Try again")
+            time.sleep(30)
+            continue
+        break
 check_file()
