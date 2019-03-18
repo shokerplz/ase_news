@@ -66,7 +66,7 @@ def bot_send(message):
             if (" | Apple SPb Event" in soup1.title.string):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
-            url_html = "<a href='"+message+"'>"+name+"</a> "+ pc_link
+            url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
             bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
         except: 
             print("Error appeared. Try again")
