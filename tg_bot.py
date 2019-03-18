@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from lxml import html
 import boto3
 import time
+import feedparser
 url_html = ""
 links = []
 past_link = ""
@@ -41,15 +42,16 @@ def check_site(past_link):
                 s3.upload_fileobj(open("links.txt", "rb"), 'heroku', 'links.txt')
                 data = past_link
                 f = open("links.txt", "a+")
-            soup = BeautifulSoup(urllib.request.urlopen("https://applespbevent.ru/"), features="lxml")
-            soup = soup.find("div", {"class": "post-inner post-hover"})
-            for link in soup.find_all('a', href=True):
-                links.append(link.get('href'))
-            if (past_link != links[0]):
-                past_link = links[0]
-                bot_send(links[0])
+            feed = feedparser.parse("https://applespbevent.ru/feed")
+            link_feed = feed.entries[0]['link']
+            #soup = BeautifulSoup(urllib.request.urlopen("https://applespbevent.ru/"), features="lxml")
+            #soup = soup.find("div", {"class": "post-inner post-hover"})
+            #for link in soup.find_all('a', href=True):
+                #links.append(link.get('href'))
+            if (past_link != link_feed):
+                past_link = link_feed
+                bot_send(link_feed)
             time.sleep(30)
-            del links[:]
 def bot_send(message):
     while True:
         try:

@@ -16,6 +16,7 @@ docker==2.5.1
 docker-compose==1.17.1
 docker-pycreds==0.2.1
 dockerpty==0.4.1
+feedparser==5.2.1
 docopt==0.6.2
 enum34==1.1.6
 funcsigs==1.0.2
