@@ -42,8 +42,15 @@ def check_site(past_link):
                 s3.upload_fileobj(open("links.txt", "rb"), 'heroku', 'links.txt')
                 data = past_link
                 f = open("links.txt", "a+")
-            feed = feedparser.parse("https://applespbevent.ru/feed")
-            link_feed = feed.entries[0]['link']
+            while True:
+                try:
+                    feed = feedparser.parse("https://applespbevent.ru/feed")
+                    link_feed = feed.entries[0]['link']
+                except:
+                    print("Error appeared. Try again")
+                    time.sleep(30)
+                    continue
+                break
             #soup = BeautifulSoup(urllib.request.urlopen("https://applespbevent.ru/"), features="lxml")
             #soup = soup.find("div", {"class": "post-inner post-hover"})
             #for link in soup.find_all('a', href=True):

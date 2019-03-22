@@ -90,7 +90,14 @@ def update():
         while(len(link) == 0):
             link = open("links.txt", "r").read()
             time.sleep(5)
-        soup = BeautifulSoup(urllib.request.urlopen(link), "lxml")
+        while True:
+            try:
+                soup = BeautifulSoup(urllib.request.urlopen(link), "lxml")
+            except:
+                print("Error appeared. Try again")
+                time.sleep(30)
+                continue
+            break
         for tag in soup.find_all("meta"):
             if tag.get("property", None) == "og:image":
                 image_link = tag.get("content", None)
