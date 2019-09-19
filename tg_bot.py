@@ -11,7 +11,7 @@ import feedparser
 url_html = ""
 links = []
 past_link = ""
-bot = telebot.TeleBot("787378414:AAGuzZDHyCEJY7ssd0LP_76HaDZ-oRekF2k")
+bot = telebot.TeleBot("///")
 session = boto3.session.Session()
 s3 = session.client(
     service_name='s3',
