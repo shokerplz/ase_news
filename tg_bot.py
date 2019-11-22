@@ -74,6 +74,7 @@ def bot_send(message):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
             url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
+            print(url_html)
             try:
                 bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
             except Exception as e:
