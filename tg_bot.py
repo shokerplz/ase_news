@@ -75,8 +75,9 @@ def bot_send(message):
             else: name = soup1.title.string
             url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
             bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
-        except: 
+        except Exception as e: 
             print("Error appeared. Try again")
+            print(e)
             time.sleep(30)
             continue
         break
