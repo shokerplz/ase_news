@@ -10,6 +10,7 @@ import time
 import subprocess
 import signal
 import boto3
+from __main__ import tg_bot
 session = boto3.session.Session()
 s3 = session.client(
     service_name='s3',
@@ -58,6 +59,7 @@ def send_status(message):
         print (check)
         if (check == "1"):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя отправленная новость: "+link1)
+            bot.send_message(message.chat.id, tg_bot.url_html)
             time.sleep(60)
             open("working.ase", "w").close()
         else: bot.reply_to(message, "Бот не работает")
