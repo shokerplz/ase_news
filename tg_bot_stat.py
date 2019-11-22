@@ -59,7 +59,7 @@ def send_status(message):
         print (check)
         if (check == "1"):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя отправленная новость: "+link1)
-            bot_send_last(link_to_status)
+            bot.send_message(message.chat.id, bot_send_last(link_to_status), parse_mode = 'HTML')
             time.sleep(60)
             open("working.ase", "w").close()
         else: bot.reply_to(message, "Бот не работает")
@@ -100,7 +100,7 @@ def bot_send_last(message):
             url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
             print(url_html)
             try:
-                bot.send_message(message.chat.id, url_html, parse_mode = 'HTML')
+                return url_html
             except Exception as e:
                 print("SECOND ERROR")
                 print(e)
