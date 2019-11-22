@@ -58,6 +58,7 @@ def send_status(message):
         print (check)
         if (check == "1"):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя отправленная новость: "+link1)
+            bot_send_last(link1)
             time.sleep(60)
             open("working.ase", "w").close()
         else: bot.reply_to(message, "Бот не работает")
@@ -81,6 +82,33 @@ def send_inst_status(message):
 if (os.path.isfile("working.ase")): 
     os.remove("working.ase")
     print("file removed")
+def bot_send_last(message):
+    while True:
+        try:
+            soup1 = BeautifulSoup(urllib.request.urlopen(message))
+            pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
+            message = message[8:]
+            for tag in soup1.find_all("meta"):
+                if tag.get("property", None) == "og:description":
+                    describtion = tag.get("content", None)
+            message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
+            print(message)
+            if (" | Apple SPb Event" in soup1.title.string):
+                name = soup1.title.string[:-18]
+            else: name = soup1.title.string
+            url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
+            print(url_html)
+            try:
+                bot.send_message(message.chat.id, url_html, parse_mode = 'HTML')
+            except Exception as e:
+                print("SECOND ERROR")
+                print(e)
+        except Exception as e: 
+            print("Error appeared. Try again")
+            print(e)
+            time.sleep(30)
+            continue
+        break
 tg_bot = subprocess.Popen("python tg_bot.py 175628933 -1001122357647", shell=True, preexec_fn=os.setsid)
 inst_bot = subprocess.Popen("python inst_bot.py "+inst_usr+" "+inst_pwd, shell=True, preexec_fn=os.setsid)
 bot.infinity_polling(True)
