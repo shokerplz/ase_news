@@ -49,6 +49,7 @@ def send_status(message):
     file = open("links.txt", "r")
     link1 = file.read()
     if (len(link1) != 0):
+        link_to_status = link1
         soup = BeautifulSoup(urllib.request.urlopen(link1), features="lxml")
         link1 = soup.title.string
         if (os.path.isfile("working.ase")):
@@ -58,7 +59,7 @@ def send_status(message):
         print (check)
         if (check == "1"):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя отправленная новость: "+link1)
-            bot_send_last(link1)
+            bot_send_last(link_to_status)
             time.sleep(60)
             open("working.ase", "w").close()
         else: bot.reply_to(message, "Бот не работает")
