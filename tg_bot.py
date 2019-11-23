@@ -9,6 +9,7 @@ import boto3
 import time
 import feedparser
 url_html = ""
+channel_id = -1001122357647
 links = []
 past_link = ""
 bot = telebot.TeleBot("///")
@@ -76,7 +77,7 @@ def bot_send(message):
             url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
             print(url_html)
             try:
-                bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
+                bot.send_message(channel_id, url_html, parse_mode = 'HTML')
             except Exception as e:
                 print("SECOND ERROR")
                 print(e)
