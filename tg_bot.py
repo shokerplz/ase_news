@@ -6,12 +6,13 @@ import urllib.request
 from bs4 import BeautifulSoup
 from lxml import html
 import boto3
+import os
 import time
 import feedparser
 url_html = ""
 links = []
 past_link = ""
-tg_bot_key = os.environ("TG_BOT_API_KEY")
+tg_bot_key = os.environ['TG_BOT_API_KEY']
 bot = telebot.TeleBot(tg_bot_key)
 session = boto3.session.Session()
 s3 = session.client(
