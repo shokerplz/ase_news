@@ -11,7 +11,8 @@ import feedparser
 url_html = ""
 links = []
 past_link = ""
-bot = telebot.TeleBot("///")
+tg_bot_key = os.environ("TG_BOT_API_KEY")
+bot = telebot.TeleBot(tg_bot_key)
 session = boto3.session.Session()
 s3 = session.client(
     service_name='s3',
