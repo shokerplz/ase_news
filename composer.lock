@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "002cf77f209f09b01600428b67fd422d",
+    "content-hash": "f9537d079bca88e5ba5bc9aa83c81de9",
     "packages": [
         {
             "name": "binsoul/net-mqtt",
@@ -1289,6 +1289,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-pdo_sqlite": "*"
+    },
     "platform-dev": []
 }
