@@ -3,6 +3,11 @@ set_time_limit(0);
 date_default_timezone_set('UTC');
 require __DIR__.'/vendor/autoload.php';
 /////// CONFIG ///////
+$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+    'storage'     => 'sqlite',
+    'dbfilename'  => 'instagram.sqlite',
+    'dbtablename' => 'instagram_sessions',
+]);
 $username            = $argv[1];
 $password            = $argv[2];
 $debug = true;
