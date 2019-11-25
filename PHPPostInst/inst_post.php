@@ -3,11 +3,6 @@ set_time_limit(0);
 date_default_timezone_set('UTC');
 require __DIR__.'/vendor/autoload.php';
 /////// CONFIG ///////
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
-    'storage'     => 'sqlite',
-    'dbfilename'  => 'instagram.sqlite',
-    'dbtablename' => 'instagram_sessions',
-]);
 $username            = $argv[1];
 $password            = $argv[2];
 $debug = true;
@@ -17,7 +12,11 @@ $truncatedDebug = false;
 $photoFilename = $argv[3];
 $captionText = implode(" " ,array_slice($argv, 4));
 //////////////////////
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+    'storage'     => 'sqlite',
+    'dbfilename'  => 'instagram.sqlite',
+    'dbtablename' => 'instagram_sessions',
+]);
 try {
     $ig->login($username, $password);
 } catch (\Exception $e) {
