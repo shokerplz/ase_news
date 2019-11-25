@@ -86,7 +86,7 @@ def send_picture(final_link, link):
     else: 
         urllib.request.urlretrieve(final_link, "picture."+final_link[-3:])
         photo_phile = "picture."+final_link[-3:]
-    subprocess.call(["php", "/PHPPostInst/inst_post.php", usr, pwd, photo_phile, caption])
+    subprocess.call(["php", "PHPPostInst/inst_post.php", usr, pwd, photo_phile, caption])
     tags = ""
     s3.upload_fileobj(open(new_settings_file, "rb"), 'heroku', new_settings_file)
     print("Success")
