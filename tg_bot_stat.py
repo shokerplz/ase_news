@@ -29,13 +29,10 @@ try:
 except: print("Error appeared")
 sourcefiles = os.listdir()
 file_src = ""
-destinationpath = 'PHPPostInst/vendor/mgp25/instagram-php/sessions/'
+destinationpath = 'PHPPostInst/'
 for file in sourcefiles:
-        if file.endswith('.dat'):
-                file_src = os.path.basename(file).split("-")[0]
-                if not os.path.exists(destinationpath+file_src):
-                        os.makedirs(destinationpath+file_src)
-                shutil.move(file, os.path.join(destinationpath+file_src+"/",file))
+        if file.endswith('.sqlite'):
+            shutil.move(file, os.path.join(destinationpath, file))
 @bot.message_handler(func=lambda message: True)
 def message_receive(message):
     f = open("links.txt", "a+")
