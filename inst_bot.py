@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from lxml import html
 import requests
 import subprocess
+import shutil
 import os
 import sys
 import boto3
