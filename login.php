@@ -2,7 +2,7 @@
 use InstagramAPI\Exception\ChallengeRequiredException;
 use InstagramAPI\Instagram;
 use InstagramAPI\Response\LoginResponse;
-require __DIR__.'/PHPPostInst/vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 //Enter these options
 $username            = $argv[1];

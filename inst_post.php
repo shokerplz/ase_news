@@ -5,7 +5,7 @@ use InstagramAPI\Request\Metadata\Internal as InternalMetadata;
 use InstagramAPI\Utils;
 set_time_limit(0);
 date_default_timezone_set('UTC');
-require __DIR__.'/PHPPostInst/vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 /////// CONFIG ///////
 $username            = $argv[1];
 $password            = $argv[2];
