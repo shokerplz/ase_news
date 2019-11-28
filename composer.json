@@ -3,6 +3,7 @@
         "vendor-dir": "PHPPostInst/vendor"
     },
     "require": {
-        "mgp25/instagram-php": "^7.0"
+        "mgp25/instagram-php": "^7.0",
+        "ext-pdo_sqlite": "*"
     }
 }
