@@ -1,15 +1,13 @@
 import urllib.request
 from bs4 import BeautifulSoup
-from lxml import html
-import requests
 import subprocess
-import shutil
+from PIL import Image
 import os
+from instagram_private_api_extensions import media
+from instagram_private_api import MediaRatios
 import sys
 import boto3
-import codecs
 import time
-import json
 usr = sys.argv[1]
 pwd  = sys.argv[2]
 tag = []
@@ -23,6 +21,13 @@ s3 = session.client(
     service_name='s3',
     endpoint_url='https://storage.yandexcloud.net'
 )
+def make_square(im, min_size=256, fill_color=(0, 0, 0, 0)):	
+    x, y = im.size	
+    size = max(min_size, x, y)
+    if size > 1080: size = 1070	
+    new_im = Image.new('RGB', (size, size), fill_color)	
+    new_im.paste(im, ((size - x) // 2, (size - y) // 2))	
+    new_im.save("picture.jpg")
 def check_site():
     global tag
     global past_link
@@ -35,7 +40,7 @@ def check_site():
         if (open("inst_link.txt", "r").read()!=final_link):
             open("inst_link.txt", "w").close()
             open("inst_link.txt", "w").write(final_link)
-            s3.upload_fileobj(open("inst_link.txt", "rb"), 'heroku', 'inst_link.txt')
+            #s3.upload_fileobj(open("inst_link.txt", "rb"), 'heroku', 'inst_link.txt')
             if (os.path.isfile("picture.jpg")):
                 os.remove("picture.jpg")
             if (os.path.isfile("picture.png")):
@@ -83,12 +88,17 @@ def send_picture(final_link, link):
     print(final_link)
     if (final_link.find("jpeg") != -1):
         urllib.request.urlretrieve(final_link, "picture."+"jpg")
-        photo_phile = "picture.jpg"
-    else: 
-        urllib.request.urlretrieve(final_link, "picture."+final_link[-3:])
-        photo_phile = "picture."+final_link[-3:]
-    subprocess.call(["php", "PHPPostInst/inst_post.php", usr, pwd, photo_phile, caption])
+    else: urllib.request.urlretrieve(final_link, "picture."+final_link[-3:])
+    if (final_link[-3:] == "png"):
+        im = Image.open("picture.png")
+        rgb_im = im.convert('RGB')
+        rgb_im.save('picture.jpg')
+    photo_data, photo_size = media.prepare_image("picture.jpg", aspect_ratios=MediaRatios.standard)
+    if(photo_size[0]>photo_size[1] or photo_size[1]>photo_size[0]):
+        work_image = Image.open("picture.jpg")
+        make_square(work_image) 
+    subprocess.call(["php", "inst_post.php", usr, pwd, "picture.jpg", caption])
     tags = ""
-    s3.upload_fileobj(open(new_settings_file, "rb"), 'heroku', new_settings_file)
+    #s3.upload_fileobj(open('instagram.sqlite', "rb"), 'heroku', 'instagram.sqlite')
     print("Success")
 check_site()

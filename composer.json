@@ -1,4 +1,7 @@
 {
+    "config": {
+        "vendor-dir": "PHPPostInst/vendor"
+    },
     "require": {
         "mgp25/instagram-php": "^7.0"
     }
