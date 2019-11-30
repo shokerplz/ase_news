@@ -40,7 +40,6 @@ def check_site():
         if (open("inst_link.txt", "r").read()!=final_link):
             open("inst_link.txt", "w").close()
             open("inst_link.txt", "w").write(final_link)
-            #s3.upload_fileobj(open("inst_link.txt", "rb"), 'heroku', 'inst_link.txt')
             if (os.path.isfile("picture.jpg")):
                 os.remove("picture.jpg")
             if (os.path.isfile("picture.png")):
@@ -99,6 +98,6 @@ def send_picture(final_link, link):
         make_square(work_image) 
     subprocess.call(["php", "inst_post.php", usr, pwd, "picture.jpg", caption])
     tags = ""
-    #s3.upload_fileobj(open('instagram.sqlite', "rb"), 'heroku', 'instagram.sqlite')
+    s3.upload_fileobj(open('instagram.sqlite', "rb"), 'heroku', 'instagram.sqlite')
     print("Success")
 check_site()
