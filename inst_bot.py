@@ -99,5 +99,6 @@ def send_picture(final_link, link):
     subprocess.call(["php", "inst_post.php", usr, pwd, "picture.jpg", caption])
     tags = ""
     s3.upload_fileobj(open('instagram.sqlite', "rb"), 'heroku', 'instagram.sqlite')
+    s3.upload_fileobj(open('inst_link.txt', "rb"), 'heroku', 'inst_link.txt')
     print("Success")
 check_site()
