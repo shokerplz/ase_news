@@ -19,6 +19,9 @@ s3 = session.client(
     service_name='s3',
     endpoint_url='https://storage.yandexcloud.net'
 )
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
+opener = AppURLopener()
 def check_file():
     global past_link
     f = open("links.txt", "r")
@@ -64,7 +67,7 @@ def check_site(past_link):
 def bot_send(message):
     while True:
         try:
-            soup1 = BeautifulSoup(urllib.request.urlopen(message))
+            soup1 = BeautifulSoup(opener.open(message))
             pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
             message = message[8:]
             for tag in soup1.find_all("meta"):
