@@ -21,6 +21,9 @@ s3 = session.client(
     service_name='s3',
     endpoint_url='https://storage.yandexcloud.net'
 )
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
+opener = AppURLopener()
 def make_square(im, min_size=256, fill_color=(0, 0, 0, 0)):	
     x, y = im.size	
     size = max(min_size, x, y)
@@ -60,7 +63,7 @@ def update():
             time.sleep(5)
         while True:
             try:
-                soup = BeautifulSoup(urllib.request.urlopen(link), "lxml")
+                soup = BeautifulSoup(opener.open(link))
             except:
                 print("Error appeared. Try again")
                 time.sleep(30)
@@ -73,7 +76,7 @@ def update():
 def send_picture(final_link, link):
     global tags
     global new_settings_file
-    coup = BeautifulSoup(urllib.request.urlopen(link), "lxml")
+    coup = BeautifulSoup(opener.open(link))
     for tag in coup.find_all("meta"):
         if tag.get("property", None) == "og:description":
             describtion = tag.get("content", None)
@@ -83,7 +86,7 @@ def send_picture(final_link, link):
                 tags += "#"+(tag.get("content", None)).replace(" ", "_")+" "
             else: tags += (tag.get("content", None)).replace(" ", "_")+" "
     link_site = "aSPBe.ru"
-    caption = BeautifulSoup(urllib.request.urlopen(link)).title.string+"\n"+describtion+"\n"+link_site+"\n"+tags
+    caption = BeautifulSoup(opener.open(link)).title.string+"\n"+describtion+"\n"+link_site+"\n"+tags
     print(final_link)
     if (final_link.find("jpeg") != -1):
         urllib.request.urlretrieve(final_link, "picture."+"jpg")
