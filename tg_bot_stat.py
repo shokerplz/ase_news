@@ -55,7 +55,7 @@ def send_status(message):
         link1 = soup.title.string
         if (os.path.isfile("working.ase")):
             work = open("working.ase", "r")
-            check = work.read()
+            check = work.read()[0]
         else: check = "1"
         print (check)
         if (check == "1"):
