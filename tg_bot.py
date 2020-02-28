@@ -68,7 +68,7 @@ def bot_send(message):
     while True:
         try:
             soup1 = BeautifulSoup(opener.open(message))
-            pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
+            msg1 = message
             message = message[8:]
             for tag in soup1.find_all("meta"):
                 if tag.get("property", None) == "og:description":
@@ -78,7 +78,8 @@ def bot_send(message):
             if (" | Apple SPb Event" in soup1.title.string):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
-            url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
+            pc_link = "<a href='"+msg1+"'>"+name+"</a>"
+            url_html = "<a href='"+message+"'>"+"&#8232"+"</a>"+pc_link
             print(url_html)
             try:
                 bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
