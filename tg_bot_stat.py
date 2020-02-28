@@ -60,7 +60,8 @@ def send_status(message):
         print (check)
         if (check == "1"):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя отправленная новость: "+link1)
-            bot.send_message(message.chat.id, bot_send_last(link_to_status), parse_mode = 'HTML')
+            bot_send_last(link_to_status, message.chat.id)
+            bot_send(link_to_status)
             time.sleep(60)
             open("working.ase", "w").close()
         else: bot.reply_to(message, "Бот не работает")
@@ -84,11 +85,11 @@ def send_inst_status(message):
 if (os.path.isfile("working.ase")): 
     os.remove("working.ase")
     print("file removed")
-def bot_send_last(message):
+def bot_send_last(message, send_to):
     while True:
         try:
-            soup1 = BeautifulSoup(urllib.request.urlopen(message))
-            pc_link = "<a href='"+message+"'>"+"Прямая ссылка на новость"+"</a>"
+            soup1 = BeautifulSoup(opener.open(message))
+            msg1 = message
             message = message[8:]
             for tag in soup1.find_all("meta"):
                 if tag.get("property", None) == "og:description":
@@ -98,10 +99,10 @@ def bot_send_last(message):
             if (" | Apple SPb Event" in soup1.title.string):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
-            url_html = "<a href='"+message+"'>"+name+"</a> "+"\n"+pc_link
-            print(url_html)
+            pc_link = "<a href='"+msg1+"'>"+name+"</a>"
+            url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link
             try:
-                return url_html
+                bot.send_message(send_to, url_html, parse_mode = 'HTML')
             except Exception as e:
                 print("SECOND ERROR")
                 print(e)
