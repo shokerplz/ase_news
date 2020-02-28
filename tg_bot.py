@@ -79,7 +79,7 @@ def bot_send(message):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
             pc_link = "<a href='"+msg1+"'>"+name+"</a>"
-            url_html = "<a href='"+message+"'>"+"&#8232"+"</a>"+pc_link
+            url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link
             print(url_html)
             try:
                 bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
