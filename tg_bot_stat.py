@@ -56,7 +56,7 @@ def send_status(message):
         if (os.path.isfile("working.ase")):
             work = open("working.ase", "r")
             check = work.read()
-        else: check = "0"
+        else: check = "1"
         print (check)
         if (check == "1"):
             bot.send_message(message.chat.id, "Бот работает \nПоследняя отправленная новость: "+link1)
