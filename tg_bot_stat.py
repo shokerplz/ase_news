@@ -12,6 +12,9 @@ import subprocess
 import signal
 import boto3
 session = boto3.session.Session()
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
+opener = AppURLopener()
 s3 = session.client(
     service_name='s3',
     endpoint_url='https://storage.yandexcloud.net'
