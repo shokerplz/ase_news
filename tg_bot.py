@@ -82,7 +82,7 @@ def bot_send(message):
             url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link
             print(url_html)
             try:
-                bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
+                bot.send_message(sys.argv[2], pc_link, parse_mode = 'HTML')
             except Exception as e:
                 print("SECOND ERROR")
                 print(e)
