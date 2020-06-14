@@ -74,15 +74,17 @@ def bot_send(message):
                 if tag.get("property", None) == "og:description":
                     describtion = tag.get("content", None)
             message = "https://t.me/iv?url=https%3A%2F%2F"+message+"%2F&rhash=588c4d85708c86"
-            print(message)
             if (" | Apple SPb Event" in soup1.title.string):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
             pc_link = "<a href='"+msg1+"'>"+name+"</a>"
-            url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link
-            print(url_html)
+            pc_link_iv = "<a href='"+msg1+"'>"+"Прямая ссылка на новость"+"</a>"
+            url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link_iv
             try:
-                bot.send_message(sys.argv[2], pc_link, parse_mode = 'HTML')
+                if (soup1.find("a", id="iv_meta")):
+                    bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
+                else:
+                    bot.send_message(sys.argv[2], pc_link, parse_mode = 'HTML')
             except Exception as e:
                 print("SECOND ERROR")
                 print(e)
