@@ -78,8 +78,7 @@ def bot_send(message):
                 name = soup1.title.string[:-18]
             else: name = soup1.title.string
             pc_link = "<a href='"+msg1+"'>"+name+"</a>"
-            pc_link_iv = "<a href='"+msg1+"'>"+"Прямая ссылка на новость"+"</a>"
-            url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link_iv
+            url_html = "<a href='"+message+"'>"+"‎‎‎‏‏‎&#8232"+"</a>"+pc_link
             try:
                 if (soup1.find("a", id="iv_meta")):
                     bot.send_message(sys.argv[2], url_html, parse_mode = 'HTML')
